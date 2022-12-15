@@ -7,13 +7,14 @@ Date: 10/22/2022
 from __future__ import annotations
 
 import bisect  # For sorting gameobjects by depth.
-import cursor  # For hiding the cursor.
 import os
 import time
-from typing import List, Callable
+from typing import Callable, List
 
-from .gameobject import Gameobject
+import cursor  # For hiding the cursor.
+
 from ..graphics.screen import Screen
+from .gameobject import Gameobject
 
 
 class Engine:

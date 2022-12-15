@@ -1,0 +1,57 @@
+[tool.black]
+py36 = true
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.git
+    | \.hg
+    | \.mypy_cache
+    | \.tox
+    | \.venv
+    | _build
+    | buck-out
+    | build
+    | dist
+
+    # The following are specific to Black, you probably don't want those.
+    | blib2to3
+    | tests/data
+)/
+'''
+line-length = 99
+
+[tool.isort]
+profile = "black"
+known_first_party = "mypy"
+
+[flake8]
+max-line-length = 99
+
+[tool.pylint]
+max-line-length = 99
+good-names= [
+    "x",
+    "y",
+    "xi",
+    "yi",
+    "i",
+    "j",
+    "k",
+    "dx",
+    "dy",
+    "go", # gameobject shorthand
+    "rb" # rigidbody shorthand
+]
+disable = [
+  "missing-docstring",
+  "unused-argument",
+  "no-value-for-parameter",
+  "invalid-name",
+  "no-member",
+  "no-else-return",
+  "bad-whitespace",
+  "bad-continuation",
+  "fixme",
+  "protected-access",
+  "too-few-public-methods",
+]

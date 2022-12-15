@@ -1,5 +1,6 @@
-from termgame import PhysicsGameobject, PhysicsEngine, Screen
 import pymunk
+
+from termgame import PhysicsEngine, PhysicsGameobject, Screen
 
 
 class Particle(PhysicsGameobject):

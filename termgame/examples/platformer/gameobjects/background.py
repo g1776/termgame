@@ -1,6 +1,7 @@
+import os
+
 from termgame import *
 from termgame.util import scroll_sprite
-import os
 
 
 class Background(Gameobject):
@@ -9,7 +10,8 @@ class Background(Gameobject):
     def __init__(self, screen_width, screen_height):
         sprites = [
             Screen.from_image(
-                Background.SPRITES_FOLDER + "background.png", (screen_width, screen_height)
+                Background.SPRITES_FOLDER + "background.png",
+                (screen_width, screen_height),
             )
         ]
         Gameobject.__init__(

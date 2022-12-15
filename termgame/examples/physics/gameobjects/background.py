@@ -1,6 +1,7 @@
-from termgame import Gameobject, Engine, Screen
-from termgame.util import scroll_sprite
 import os
+
+from termgame import Engine, Gameobject, Screen
+from termgame.util import scroll_sprite
 
 
 class Background(Gameobject):

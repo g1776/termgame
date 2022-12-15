@@ -4,11 +4,13 @@ Author: Gregory Glatzer
 Date: 11/07/2022
 """
 
-from .graphics.screen import Screen
-from .base import PhysicsGameobject
 from typing import List
-import pymunk
+
 import numpy as np
+import pymunk
+
+from .base import PhysicsGameobject
+from .graphics.screen import Screen
 
 
 def stretch_animation(sprites: List[Screen], n: int):
@@ -33,7 +35,9 @@ def flip_animation(sprites: List[Screen], axis: str = "x"):
 
     new_sprites = []
     for sprite in sprites:
-        new_sprite: Screen = Screen(sprite.width, sprite.height).paint_screen(sprite, 0, 0)
+        new_sprite: Screen = Screen(sprite.width, sprite.height).paint_screen(
+            sprite, 0, 0
+        )
         new_sprite.pixels = np.flip(new_sprite.pixels, axis=0 if axis == "y" else 1)
         new_sprites.append(new_sprite)
     return new_sprites
@@ -52,7 +56,8 @@ def scroll_sprite(sprite: Screen, dx: int, dy: int) -> Screen:
 
 def get_bb_poly(go: PhysicsGameobject) -> pymunk.Poly:
     """
-    Get a polygon for a gameobject to be used pymunk shape that is a rectangle the width and height of the gameobject.
+    Get a polygon for a gameobject to be used pymunk shape
+    that is a rectangle the width and height of the gameobject.
     """
 
     return pymunk.Poly(

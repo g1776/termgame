@@ -4,13 +4,15 @@ Author: Gregory Glatzer
 Date: 12/12/2022
 """
 
+from typing import List, cast
+
+import pymunk
+
+from ..logger import Logger
+from ..util import get_bb_poly
 from .engine import Engine
 from .gameobject import Gameobject
 from .physics_gameobject import PhysicsGameobject
-from ..logger import Logger
-import pymunk
-from typing import cast, List
-from ..util import get_bb_poly
 
 
 class PhysicsEngine(Engine):
@@ -26,7 +28,8 @@ class PhysicsEngine(Engine):
         Args:
             width (int): Screen Width
             height (int): Screen Height
-            gravity (tuple[int, int], optional): The gravity for the physics simulation. Use 98.1, not 9.8. Defaults to (0, 98.1).
+            gravity (tuple[int, int], optional): The gravity for the physics simulation.
+                Use 98.1, not 9.8. Defaults to (0, 98.1).
         """
 
         self.__space = pymunk.Space()
@@ -35,7 +38,8 @@ class PhysicsEngine(Engine):
 
     def add_gameobject(self, gameobject: Gameobject) -> None:
         """
-        Add a gameobject to the engine. Will also add the rigidbody to the physics space, if it has one.
+        Add a gameobject to the engine. Will also add the rigidbody
+            to the physics space, if it has one.
         """
 
         # this will be the collision shape for the static gameobject, if we end up making one.
@@ -66,18 +70,22 @@ class PhysicsEngine(Engine):
         self._headless = headless
 
         def runtime_injection(self: PhysicsEngine):
-            """This function is injected into the base engine's run function. It is called every frame.
+            """This function is injected into the base engine's run function.
+                It is called every frame.
 
             Args:
                 self (PhysicsEngine): The engine.
                 fps (int): The frames per second.
-                ppf (int, optional): Physics Per Frame. This defines the number of physics simulations per frame, ie how many times "fixed_update()" is called per frame. Defaults to 5.
+                ppf (int, optional): Physics Per Frame. This defines the number of physics
+                    simulations per frame, ie how many times "fixed_update()"
+                    is called per frame. Defaults to 5.
             """
             for _ in range(ppf):
                 self.space.step(1 / (fps * ppf))
 
             go_in_call_order = sorted(
-                cast(List[PhysicsGameobject], self.gameobjects), key=lambda go: go.update_order
+                cast(List[PhysicsGameobject], self.gameobjects),
+                key=lambda go: go.update_order,
             )
             for gameobject in go_in_call_order:
                 gameobject.on_fixed_update(self.frame, self)

@@ -5,6 +5,7 @@ Date: 10/23/2022
 """
 
 from __future__ import annotations
+
 from dataclasses import dataclass
 from typing import Callable, List
 

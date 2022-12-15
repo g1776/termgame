@@ -1,6 +1,8 @@
-from termgame import PhysicsGameobject, Screen
 import os
+
 import pymunk
+
+from termgame import PhysicsGameobject, Screen
 
 
 class Ground(PhysicsGameobject):
@@ -14,7 +16,8 @@ class Ground(PhysicsGameobject):
 
     def on_start(self, engine):
         c = pymunk.Poly(
-            self.rb, [(0, 0), (self.width, 0), (self.width, self.height), (0, self.height)]
+            self.rb,
+            [(0, 0), (self.width, 0), (self.width, self.height), (0, self.height)],
         )
         c.mass = 1
         engine.space.add(c)

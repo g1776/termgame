@@ -1,7 +1,8 @@
-from termgame import PhysicsEngine
-from gameobjects.player import Player
 from gameobjects.background import Background
 from gameobjects.ground import Ground
+from gameobjects.player import Player
+
+from termgame import PhysicsEngine
 
 W = 32
 H = 32

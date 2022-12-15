@@ -1,5 +1,6 @@
-from termgame import Gameobject
 import random
+
+from termgame import Gameobject
 
 
 class WaveManager(Gameobject):

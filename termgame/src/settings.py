@@ -1,8 +1,9 @@
 """Settings for the project."""
 
-from dotenv import load_dotenv
-from dataclasses import dataclass
 import os
+from dataclasses import dataclass
+
+from dotenv import load_dotenv
 
 load_dotenv()
 

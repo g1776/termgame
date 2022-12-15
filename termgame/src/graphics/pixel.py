@@ -23,7 +23,9 @@ class RGBColor:
 
         # check values
         if not (0 <= value <= 255):
-            raise ValueError(f"Invalid value: {value}. Value must be between 0-255, inclusive")
+            raise ValueError(
+                f"Invalid value: {value}. Value must be between 0-255, inclusive"
+            )
         if channel not in ["r", "g", "b"]:
             raise ValueError("Channel must be r, g, or b")
 
@@ -61,7 +63,11 @@ class RGBPixel:
 
     def display(self) -> None:
         print(
-            color(self.symbol, fore=(255, 0, 0), back=(self.color.r, self.color.g, self.color.b))
+            color(
+                self.symbol,
+                fore=(255, 0, 0),
+                back=(self.color.r, self.color.g, self.color.b),
+            )
         )
 
     def get(self) -> str:
@@ -72,7 +78,9 @@ class RGBPixel:
 
     def __str__(self):
         return color(
-            self.symbol, fore=(255, 0, 0), back=(self.color.r, self.color.g, self.color.b)
+            self.symbol,
+            fore=(255, 0, 0),
+            back=(self.color.r, self.color.g, self.color.b),
         )
 
     __repr__ = __str__

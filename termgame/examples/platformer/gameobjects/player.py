@@ -1,8 +1,9 @@
-from termgame import PhysicsGameobject, Screen, Engine
-from termgame.util import stretch_animation, flip_animation
 import os
+
 import keyboard
-from termgame.util import get_bb_poly
+
+from termgame import Engine, PhysicsGameobject, Screen
+from termgame.util import flip_animation, get_bb_poly, stretch_animation
 
 
 class Player(PhysicsGameobject):

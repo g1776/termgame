@@ -4,9 +4,10 @@ Author: Gregory Glatzer
 Date: 10/24/2022
 """
 
-from termgame import PhysicsEngine
-from gameobjects.logo import DVDLogo
 from gameobjects.background import Background
+from gameobjects.logo import DVDLogo
+
+from termgame import PhysicsEngine
 
 # define some constants
 W = 32

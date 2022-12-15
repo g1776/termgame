@@ -1,5 +1,6 @@
-from termgame import PhysicsGameobject, Engine, Screen
 import pymunk
+
+from termgame import Engine, PhysicsGameobject, Screen
 
 
 class Wall(PhysicsGameobject):

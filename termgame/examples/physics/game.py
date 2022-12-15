@@ -1,9 +1,11 @@
-from termgame import PhysicsEngine
+import random
+
+from gameobjects.background import Background
 from gameobjects.particle import Particle
 from gameobjects.walls import Wall
-from gameobjects.background import Background
 from gameobjects.wave_manager import WaveManager
-import random
+
+from termgame import PhysicsEngine
 
 W = 60
 H = 32

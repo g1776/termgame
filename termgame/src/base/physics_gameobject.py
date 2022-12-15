@@ -1,8 +1,11 @@
 from __future__ import annotations
-from .gameobject import Gameobject
+
 from typing import Callable
+
 import pymunk
+
 from ..logger import Logger
+from .gameobject import Gameobject
 
 
 class PhysicsGameobject(Gameobject):
@@ -25,15 +28,16 @@ class PhysicsGameobject(Gameobject):
 
             def limit_velocity(body, gravity, damping, dt):
                 pymunk.Body.update_velocity(body, gravity, damping, dt)
-                l = body.velocity.length
-                if l > max_velocity:
-                    scale = max_velocity / l
+                body_length = body.velocity.length
+                if body_length > max_velocity:
+                    scale = max_velocity / body_length
                     body.velocity = body.velocity * scale
 
             self.__rigidbody.velocity_func = limit_velocity
 
         def internal_on_fixed_update(frame: int, engine):
-            """Some things we want to do every fixed frame on top of what the developer wants, after the physics engine has updated."""
+            """Some things we want to do every fixed frame on top of what the
+            developer wants, after the physics engine has updated."""
 
             if len(self.__rigidbody.shapes) == 0:
                 Logger.warning(
@@ -45,7 +49,8 @@ class PhysicsGameobject(Gameobject):
             self.x = round(self.__rigidbody.position.x)
             self.y = round(self.__rigidbody.position.y)
 
-            # this is a hack to make sure the object always stays within the screen. TODO: fix this.
+            # this is a hack to make sure the object always stays within the screen.
+            # TODO: fix this.
             if self.x < 0:
                 self.x = 0
             if self.y < 0:
@@ -78,7 +83,9 @@ class PhysicsGameobject(Gameobject):
         self.__rigidbody = value
 
     @staticmethod
-    def from_gameobject(gameobject: Gameobject, static_body: bool = True) -> PhysicsGameobject:
+    def from_gameobject(
+        gameobject: Gameobject, static_body: bool = True
+    ) -> PhysicsGameobject:
         """Convert a Gameobject to a PhysicsGameobject."""
         return PhysicsGameobject(
             x=gameobject.x,

@@ -5,11 +5,13 @@ Date: 10/22/2022
 """
 
 from __future__ import annotations
+
 from typing import Tuple
 
 import numpy as np
-from .pixel import RGBPixel, RGBColor
 from PIL import Image
+
+from .pixel import RGBColor, RGBPixel
 
 
 class Screen:
@@ -88,7 +90,9 @@ class Screen:
 
     @staticmethod
     def from_image(
-        image: np.ndarray | str, resize: Tuple[int, int] | None = None, has_alpha: bool = False
+        image: np.ndarray | str,
+        resize: Tuple[int, int] | None = None,
+        has_alpha: bool = False,
     ) -> Screen:
         """
         Create a screen from an image (can be a path to an image or a numpy array).\n
@@ -129,7 +133,10 @@ class Screen:
 
     def clear(self) -> None:
         self.pixels = np.array(
-            [[RGBPixel(transparent=True) for _ in range(self.width)] for _ in range(self.height)]
+            [
+                [RGBPixel(transparent=True) for _ in range(self.width)]
+                for _ in range(self.height)
+            ]
         )
 
     def render(self) -> None:

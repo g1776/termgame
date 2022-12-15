@@ -1,9 +1,12 @@
 from __future__ import annotations
+
+import os
 from random import randint
+
+import pymunk
+
 from termgame import PhysicsGameobject, Screen
 from termgame.util import stretch_animation
-import os
-import pymunk
 
 
 class DVDLogo(PhysicsGameobject):
@@ -15,7 +18,9 @@ class DVDLogo(PhysicsGameobject):
 
         sprites = stretch_animation(
             [
-                Screen.from_image(DVDLogo.SPRITES_FOLDER + "dvd.png", resize=DVDLogo.DVD_SIZE),
+                Screen.from_image(
+                    DVDLogo.SPRITES_FOLDER + "dvd.png", resize=DVDLogo.DVD_SIZE
+                ),
                 Screen.from_image(
                     DVDLogo.SPRITES_FOLDER + "dvd_yellow.png", resize=DVDLogo.DVD_SIZE
                 ),
