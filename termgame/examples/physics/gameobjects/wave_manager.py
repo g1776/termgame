@@ -22,8 +22,8 @@ class WaveManager(Gameobject):
         if engine.state["wave"]:
             engine.state["wave"] = False
 
-        # Turn wave on at chance of 5%
-        if random.randint(0, 100) > 95:
+        # Turn wave on at chance of 10%
+        if random.randint(0, 100) > 90:
             engine.state["wave"] = True
             force_x = engine.space.gravity[1] * random.randint(-20, 20)
             force_y = engine.space.gravity[1] * random.randint(0, 20)

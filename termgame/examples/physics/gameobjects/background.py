@@ -20,4 +20,4 @@ class Background(Gameobject):
 
         # scroll the background every 20 frammes
         if frame % 20 == 0:
-            self.sprites[0] = scroll_sprite(self.sprites[0], 0, -3)
+            self.sprites[0] = scroll_sprite(self.sprites[0], 0, -1)

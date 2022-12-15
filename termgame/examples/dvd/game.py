@@ -13,4 +13,4 @@ W = 32
 H = 32
 
 e = PhysicsEngine(W, H, gameobjects=[Background(W, H), DVDLogo()])
-e.run(fps=10, headless=False)
+e.run(fps=10)
