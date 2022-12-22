@@ -11,7 +11,7 @@ Created by Gregory Glatzer.
 
 <!-- Load termgame.gif and center -->
 <div style="text-align: center">
-    <img src="termgame.gif" width="500px" alt="termgame wave machine example with physics"/>
+    <img src="https://drive.google.com/uc?export=view&id=1fADbkjp8r67cSr-1Y25wCDaNiy5f76l_" width="500px" alt="termgame wave machine example with physics"/>
 </div>
 
 ## Features
