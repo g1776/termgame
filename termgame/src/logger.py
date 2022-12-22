@@ -12,7 +12,7 @@ from .settings import Settings
 
 # create logger
 Logger = logging.getLogger("game")
-Logger.setLevel(Settings.logSettings.level)
+Logger.setLevel(Settings.log_settings.level)
 
 formatter = logging.Formatter("%(filename)s:%(lineno)s - %(message)s")
 
@@ -25,10 +25,10 @@ formatter = logging.Formatter("%(filename)s:%(lineno)s - %(message)s")
 # add logging file
 
 # create the logging file and subfolders if they don't exist
-if not os.path.exists(os.path.dirname(Settings.logSettings.file)):
-    os.makedirs(os.path.dirname(Settings.logSettings.file))
+if not os.path.exists(os.path.dirname(Settings.log_settings.file)):
+    os.makedirs(os.path.dirname(Settings.log_settings.file))
 
 
-fh = logging.FileHandler(Settings.logSettings.file)
+fh = logging.FileHandler(Settings.log_settings.file)
 fh.setFormatter(formatter)
 Logger.addHandler(fh)

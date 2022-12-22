@@ -5,6 +5,7 @@ from typing import Callable
 import pymunk
 
 from ..logger import Logger
+from ..util import clamp
 from .gameobject import Gameobject
 
 
@@ -41,8 +42,11 @@ class PhysicsGameobject(Gameobject):
 
             if len(self.__rigidbody.shapes) == 0:
                 Logger.warning(
-                    f"{self} has no shapes attached to its rigidbody. This may result in errors"
-                    " and unexpected behavior."
+                    (
+                        "%s has no shapes attached to its rigidbody. This may result in errors"
+                        " and unexpected behavior."
+                    ),
+                    self,
                 )
 
             # Update the position of the gameobject to match the rigidbody.
@@ -51,14 +55,8 @@ class PhysicsGameobject(Gameobject):
 
             # this is a hack to make sure the object always stays within the screen.
             # TODO: fix this.
-            if self.x < 0:
-                self.x = 0
-            if self.y < 0:
-                self.y = 0
-            if self.x > engine.width - self.width:
-                self.x = engine.width - self.width
-            if self.y > engine.height - self.height:
-                self.y = engine.height - self.height
+            self.x = clamp(self.x, 0, engine.width - self.width)
+            self.y = clamp(self.y, 0, engine.height - self.height)
 
             # call the developer's on_fixed_update function.
             on_fixed_update(frame, engine)
@@ -83,9 +81,7 @@ class PhysicsGameobject(Gameobject):
         self.__rigidbody = value
 
     @staticmethod
-    def from_gameobject(
-        gameobject: Gameobject, static_body: bool = True
-    ) -> PhysicsGameobject:
+    def from_gameobject(gameobject: Gameobject, static_body: bool = True) -> PhysicsGameobject:
         """Convert a Gameobject to a PhysicsGameobject."""
         return PhysicsGameobject(
             x=gameobject.x,

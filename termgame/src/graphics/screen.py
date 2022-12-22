@@ -9,7 +9,7 @@ from __future__ import annotations
 from typing import Tuple
 
 import numpy as np
-from PIL import Image
+from PIL import Image  # type: ignore
 
 from .pixel import RGBColor, RGBPixel
 
@@ -32,6 +32,8 @@ class Screen:
         """Shorthand to set pixel at (x, y) when all you want to do is change the color"""
         current_pixel: RGBPixel = self.pixels[y][x]
         self.set_px(RGBPixel(RGBColor(*color), current_pixel.symbol), x, y)
+
+        return self
 
     def fill(self, color: Tuple[int, int, int]) -> Screen:
         for x in range(self.width):
@@ -100,19 +102,21 @@ class Screen:
         """
 
         if isinstance(image, str):
-            image = Image.open(image).convert("RGB" if not has_alpha else "RGBA")
+            img: Image = Image.open(image).convert(
+                "RGB" if not has_alpha else "RGBA"
+            )  # type: ignore
         else:
-            image = Image.fromarray(image)
+            img: Image = Image.fromarray(image)  # type: ignore
 
         if resize is not None:
-            image = image.resize(resize)
+            img = img.resize(resize)  # type: ignore
 
-        image = np.array(image)
+        img = np.array(img)  # type: ignore
 
-        image_width = image.shape[1]
-        image_height = image.shape[0]
+        image_width = img.shape[1]
+        image_height = img.shape[0]
 
-        return Screen(image_width, image_height).paint_image(image, has_alpha=has_alpha)
+        return Screen(image_width, image_height).paint_image(img, has_alpha=has_alpha)
 
     def __check_coordinate(self, x: int, y: int) -> bool:
         return (0 <= x < self.width) and (0 <= y < self.height)
@@ -133,10 +137,7 @@ class Screen:
 
     def clear(self) -> None:
         self.pixels = np.array(
-            [
-                [RGBPixel(transparent=True) for _ in range(self.width)]
-                for _ in range(self.height)
-            ]
+            [[RGBPixel(transparent=True) for _ in range(self.width)] for _ in range(self.height)]
         )
 
     def render(self) -> None:

@@ -16,4 +16,4 @@ class LogSettings:
 
 @dataclass(frozen=True)
 class Settings:
-    logSettings: LogSettings = LogSettings()
+    log_settings: LogSettings = LogSettings()

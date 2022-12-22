@@ -40,18 +40,25 @@ good-names= [
     "dx",
     "dy",
     "go", # gameobject shorthand
-    "rb" # rigidbody shorthand
+    "rb", # rigidbody shorthand
+    "r", # colors
+    "g",
+    "b",
+    "px", # pixel
+    "dt", # delta time
 ]
 disable = [
   "missing-docstring",
   "unused-argument",
   "no-value-for-parameter",
-  "invalid-name",
   "no-member",
   "no-else-return",
-  "bad-whitespace",
-  "bad-continuation",
   "fixme",
   "protected-access",
+  "attribute-defined-outside-init",
+  "too-many-arguments",
   "too-few-public-methods",
+  "unnecessary-dunder-call",
+  "too-many-instance-attributes",
+  "cyclic-import"
 ]

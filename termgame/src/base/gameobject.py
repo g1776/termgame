@@ -7,7 +7,7 @@ Date: 10/23/2022
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import Callable, List
+from typing import Callable, List, Dict, Any
 
 
 @dataclass
@@ -18,7 +18,7 @@ class Gameobject:
         y: int = 0,
         depth: int = 0,
         update_order: int = 0,
-        sprites: List = [],
+        sprites: List | None = None,
         on_start: Callable = lambda engine: None,
         on_update: Callable = lambda frame, engine: None,
         name: str = "",
@@ -28,7 +28,7 @@ class Gameobject:
         self.depth = depth
         self.update_order = update_order
         self.sprites = sprites
-        self.state = {}
+        self.state: Dict[Any, Any] = {}
         self.__name = name
         self.__active_sprite_idx = None
 
@@ -36,7 +36,7 @@ class Gameobject:
             """Some things we want to do every frame on top of what the developer wants."""
 
             # Move the animation to the next frame in the list of sprites.
-            if len(self.sprites) > 0:
+            if (self.sprites is not None) and (len(self.sprites) > 0):
                 self.__active_sprite_idx = frame % len(self.sprites)
 
             # call the developer's on_update function.
@@ -44,7 +44,7 @@ class Gameobject:
 
         def internal_on_start(engine):
             """Some things we want to do when the gameobject is added to the engine."""
-            if len(self.sprites) > 0:
+            if (self.sprites is not None) and (len(self.sprites) > 0):
                 self.__active_sprite_idx = 0
             on_start(engine)
 

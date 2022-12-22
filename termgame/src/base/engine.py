@@ -9,22 +9,25 @@ from __future__ import annotations
 import bisect  # For sorting gameobjects by depth.
 import os
 import time
-from typing import Callable, List
+from typing import Callable, List, Dict, Any
 
-import cursor  # For hiding the cursor.
+# for hiding the cursor
+import cursor  # type: ignore
 
 from ..graphics.screen import Screen
 from .gameobject import Gameobject
 
 
 class Engine:
-    def __init__(self, width: int, height: int, gameobjects: List[Gameobject] = []):
+    def __init__(self, width: int, height: int, gameobjects: List[Gameobject] = None):
         self.width = width
         self.height = height
-        self.state = {}
+        self.screen = Screen(self.width, self.height)
+        self.state: Dict[Any, Any] = {}
         self.__gameobjects: List[Gameobject] = []
-        for gameobject in gameobjects:
-            self.add_gameobject(gameobject)
+        if gameobjects is not None:
+            for gameobject in gameobjects:
+                self.add_gameobject(gameobject)
 
     def clear(self) -> None:
         """
@@ -67,12 +70,11 @@ class Engine:
         Run the engine at a given fps.
         """
 
-        self._headless = headless
-        self._run(fps, None)
+        self._run(fps, None, headless)
 
-    def _run(self, fps: int, runtime_injection: Callable[[Engine], None]) -> None:
-
-        self.screen = Screen(self.width, self.height)
+    def _run(
+        self, fps: int, runtime_injection: Callable[[Any], None] | None, headless: bool = False
+    ) -> None:
         self.__frame: int = 0
         self.__starting_time: float = time.time()
 
@@ -87,7 +89,7 @@ class Engine:
         # start game loop
         while True:
 
-            if self._headless:
+            if headless:
                 print(f"Frame: {self.__frame}")
 
             # call on_update for each gameobject, passing the current frame
@@ -100,7 +102,7 @@ class Engine:
             if runtime_injection:
                 runtime_injection(self)
 
-            if not self._headless:
+            if not headless:
 
                 # after updating the gameobjects, redraw them
                 for gameobject in self.gameobjects:
@@ -117,7 +119,7 @@ class Engine:
 
             time.sleep(1 / fps)
 
-            if not self._headless:
+            if not headless:
                 self.clear()
 
             # update internal counters

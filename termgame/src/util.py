@@ -13,14 +13,14 @@ from .base import PhysicsGameobject
 from .graphics.screen import Screen
 
 
-def stretch_animation(sprites: List[Screen], n: int):
+def stretch_animation(sprites: List[Screen], stretch: int):
     """
     Stretch an animation out (multiply frames). This effectively slows down the animation.
     """
 
     new_sprites = []
     for sprite in sprites:
-        for _ in range(n):
+        for _ in range(stretch):
             new_sprites.append(sprite)
     return new_sprites
 
@@ -35,9 +35,7 @@ def flip_animation(sprites: List[Screen], axis: str = "x"):
 
     new_sprites = []
     for sprite in sprites:
-        new_sprite: Screen = Screen(sprite.width, sprite.height).paint_screen(
-            sprite, 0, 0
-        )
+        new_sprite: Screen = Screen(sprite.width, sprite.height).paint_screen(sprite, 0, 0)
         new_sprite.pixels = np.flip(new_sprite.pixels, axis=0 if axis == "y" else 1)
         new_sprites.append(new_sprite)
     return new_sprites
@@ -69,3 +67,7 @@ def get_bb_poly(go: PhysicsGameobject) -> pymunk.Poly:
             (0, go.height),
         ],
     )
+
+
+def clamp(value, smallest, largest):
+    return max(smallest, min(value, largest))

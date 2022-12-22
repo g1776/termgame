@@ -9,11 +9,14 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Tuple
 
-from colr import color
+from colr import color  # type: ignore
 
 
 class RGBColor:
     def __init__(self, r: int = 0, g: int = 0, b: int = 0):
+        self.r = 0
+        self.g = 0
+        self.b = 0
         self.set(r, "r")
         self.set(g, "g")
         self.set(b, "b")
@@ -22,10 +25,8 @@ class RGBColor:
         """Set the color for a specific rgb channel. Must be an int between 0-255, inclusive"""
 
         # check values
-        if not (0 <= value <= 255):
-            raise ValueError(
-                f"Invalid value: {value}. Value must be between 0-255, inclusive"
-            )
+        if not 0 <= value <= 255:
+            raise ValueError(f"Invalid value: {value}. Value must be between 0-255, inclusive")
         if channel not in ["r", "g", "b"]:
             raise ValueError("Channel must be r, g, or b")
 
@@ -45,8 +46,11 @@ class RGBColor:
 
         return (self.r, self.g, self.b).__str__()
 
-    def __eq__(self, o: RGBColor):
-        return (self.r == o.r) and (self.g == o.g) and (self.b == o.b)
+    def __eq__(self, other: object):
+        if not isinstance(other, RGBColor):
+            return NotImplementedError(f"Cannot compare RGBColor to {type(other)}")
+
+        return (self.r == other.r) and (self.g == other.g) and (self.b == other.b)
 
     __str__ = __repr__
 
@@ -73,8 +77,10 @@ class RGBPixel:
     def get(self) -> str:
         return self.__str__()
 
-    def __eq__(self, o: RGBPixel):
-        return self.color == o.color
+    def __eq__(self, other: object):
+        if not isinstance(other, RGBPixel):
+            return NotImplementedError(f"Cannot compare RGBPixel to {type(other)}")
+        return self.color == other.color
 
     def __str__(self):
         return color(
@@ -87,5 +93,5 @@ class RGBPixel:
 
 
 if __name__ == "__main__":
-    p = RGBPixel(color=RGBColor((255, 0, 0)))
+    p = RGBPixel(color=RGBColor(*(255, 0, 0)))
     print(p)

@@ -20,7 +20,7 @@ class PhysicsEngine(Engine):
         self,
         width: int,
         height: int,
-        gravity: tuple[int, int] = (0, 98.1),
+        gravity: tuple[float, float] = (0, 98.1),
         **engine_kwargs,
     ):
         """A wrapper around the base engine to add physics with pymunk.
@@ -43,20 +43,23 @@ class PhysicsEngine(Engine):
         """
 
         # this will be the collision shape for the static gameobject, if we end up making one.
-        c = None
+        shape = None
 
         if not isinstance(gameobject, PhysicsGameobject):
             Logger.info(
-                f"Can only add PhysicsGameobjects to PhysicsEngine. {gameobject} -> STATIC"
-                " rigidbody with Poly shape."
+                (
+                    "Can only add PhysicsGameobjects to PhysicsEngine. %s -> STATIC"
+                    " rigidbody with Poly shape."
+                ),
+                gameobject,
             )
             # if the gameobject doesn't have a rigidbody, add a static one to the space.
             gameobject = PhysicsGameobject.from_gameobject(gameobject, static_body=True)
-            c = get_bb_poly(gameobject)
+            shape = get_bb_poly(gameobject)
 
         super().add_gameobject(gameobject)
-        if c is not None:
-            self.__space.add(gameobject.rb, c)
+        if shape is not None:
+            self.__space.add(gameobject.rb, shape)
         else:
             self.__space.add(gameobject.rb)
 
@@ -65,10 +68,7 @@ class PhysicsEngine(Engine):
         """The pymunk space for 2d physics."""
         return self.__space
 
-    def run(self, fps: int, ppf: int = 5, headless: bool = False):
-
-        self._headless = headless
-
+    def run(self, fps: int, headless: bool = False, ppf: int = 5) -> None:
         def runtime_injection(self: PhysicsEngine):
             """This function is injected into the base engine's run function.
                 It is called every frame.
@@ -90,4 +90,4 @@ class PhysicsEngine(Engine):
             for gameobject in go_in_call_order:
                 gameobject.on_fixed_update(self.frame, self)
 
-        self._run(fps, runtime_injection)
+        self._run(fps, runtime_injection, headless)
