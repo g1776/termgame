@@ -29,3 +29,14 @@ python termgame/examples/<example_name>/game.py
 ## Contributing
 
 Contributions are welcome! Please open an issue or pull request if you have any suggestions or bug reports. The main branch is used for releases, so please open pull requests against the `development` branch.
+
+### Before Committing
+
+Before committing, please run the following commands to ensure that your code is formatted correctly and passes all tests:
+
+```bash
+cd termgame
+black src
+mypy src
+flake8 src --max-line-length=99
+```
