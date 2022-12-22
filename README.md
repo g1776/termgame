@@ -9,12 +9,6 @@
 
 Created by Gregory Glatzer.
 
-<!-- Load termgame.gif and center -->
-
-<div style="text-align: center">
-    <img src="https://github.com/g1776/termgame/blob/main/termgame.gif?raw=true" width="500px" alt="termgame wave machine example with physics"/>
-</div>
-
 ## Features
 
 -   Simple, easy-to-use API inspired by Unity.
