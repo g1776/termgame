@@ -8,6 +8,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from typing import Callable, List, Dict, Any
+from ..util import clamp
 
 
 @dataclass
@@ -38,6 +39,11 @@ class Gameobject:
             # Move the animation to the next frame in the list of sprites.
             if (self.sprites is not None) and (len(self.sprites) > 0):
                 self.__active_sprite_idx = frame % len(self.sprites)
+
+            # this is a hack to make sure the object always stays within the screen.
+            # TODO: fix this.
+            self.x = clamp(self.x, 0, engine.width - self.width)
+            self.y = clamp(self.y, 0, engine.height - self.height)
 
             # call the developer's on_update function.
             on_update(frame, engine)

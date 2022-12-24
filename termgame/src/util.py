@@ -9,7 +9,6 @@ from typing import List
 import numpy as np
 import pymunk
 
-from .base import PhysicsGameobject
 from .graphics.screen import Screen
 
 
@@ -52,7 +51,7 @@ def scroll_sprite(sprite: Screen, dx: int, dy: int) -> Screen:
     return new_sprite
 
 
-def get_bb_poly(go: PhysicsGameobject) -> pymunk.Poly:
+def get_bb_poly(go) -> pymunk.Poly:
     """
     Get a polygon for a gameobject to be used pymunk shape
     that is a rectangle the width and height of the gameobject.

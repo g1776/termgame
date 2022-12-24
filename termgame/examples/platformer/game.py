@@ -1,3 +1,9 @@
+"""
+Description: An example of moving a player back and forth using keyboard arrows.
+Author: Gregory Glatzer
+Date: 12/24/2022
+"""
+
 from gameobjects.background import Background
 from gameobjects.ground import Ground
 from gameobjects.player import Player
