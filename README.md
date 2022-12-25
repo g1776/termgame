@@ -9,6 +9,12 @@
 
 Created by Gregory Glatzer.
 
+## Installation
+
+```bash
+pip install termgame
+```
+
 ## Features
 
 -   Simple, easy-to-use API inspired by Unity.
