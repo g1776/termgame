@@ -108,7 +108,7 @@ class Engine:
                 for gameobject in self.gameobjects:
 
                     # we can't draw gameobjects that don't have any sprites
-                    if len(gameobject.sprites) == 0:
+                    if gameobject.sprites is None or len(gameobject.sprites) == 0:
                         continue
 
                     self.screen.paint_screen(
