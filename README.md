@@ -15,6 +15,8 @@ Created by Gregory Glatzer.
 pip install termgame
 ```
 
+Find it on PyPI [here](https://pypi.org/project/termgame/).
+
 ## Features
 
 -   Simple, easy-to-use API inspired by Unity.
