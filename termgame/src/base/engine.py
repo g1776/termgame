@@ -108,10 +108,12 @@ class Engine:
                 for gameobject in self.gameobjects:
 
                     # we can't draw gameobjects that don't have any sprites
-                    if gameobject.sprites is None or len(gameobject.sprites) == 0:
+                    if gameobject.get_sprites() is None or len(gameobject.get_sprites()) == 0:
                         continue
 
-                    self.screen.paint_screen(gameobject.active_sprite, gameobject.x, gameobject.y)
+                    self.screen.paint_screen(
+                        gameobject.get_active_sprite(), gameobject.x, gameobject.y
+                    )
 
                 self.screen.render()
 

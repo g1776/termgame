@@ -47,6 +47,16 @@ flake8 src --max-line-length=99
 pylint src
 ```
 
+## Terminal settings to optimize rendering
+
+```json
+{
+    "terminal.integrated.fontSize": 8,
+    "terminal.integrated.scrollback": 78,
+    "terminal.integrated.gpuAcceleration": "on" // if you have a GPU, otherwise use "auto"
+}
+```
+
 ## Upcoming Features
 
 -   Higher resolution rendering.

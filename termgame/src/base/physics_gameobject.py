@@ -87,7 +87,7 @@ class PhysicsGameobject(Gameobject):
             x=gameobject.x,
             y=gameobject.y,
             depth=gameobject.depth,
-            sprites=gameobject.sprites,
+            sprites=gameobject.get_sprites(),
             on_start=gameobject.on_start,
             on_update=gameobject.on_update,
             name=gameobject.name,

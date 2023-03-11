@@ -102,23 +102,27 @@ class Gameobject:
             return 0
         return active_element.height
 
-    @property
-    def sprites(self) -> Any:
+    def get_sprites(self) -> Any:
         """Access the sprites (2D) of the gameobject, if any."""
         return self.__animator.elements
 
-    @property
-    def active_sprite(self) -> Any:
+    def set_sprites(self, sprites) -> None:
+        self.__animator = GameobjectAnimator(sprites)
+        return None
+
+    def get_active_sprite(self) -> Any:
         """Access the active sprite (2D) of the gameobject, if any."""
         return self.__animator.get_active_element()
 
-    @property
-    def meshes(self) -> Any:
+    def get_meshes(self) -> Any:
         """Access the meshes (3D) of the gameobject, if any."""
         return self.__animator.elements
 
-    @property
-    def active_mesh(self) -> Any:
+    def set_meshes(self, meshes) -> None:
+        self.__animator = GameobjectAnimator(meshes)
+        return None
+
+    def get_active_mesh(self) -> Any:
         """Access the active mesh (3D) of the gameobject, if any."""
         return self.__animator.get_active_element()
 

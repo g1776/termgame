@@ -37,7 +37,7 @@ class Player(PhysicsGameobject):
         )
 
     def on_start(self, engine):
-        self.sprites = self.walk_right
+        self.set_sprites(self.walk_right)
         self.jumping = False
 
         c = get_bb_poly(self)
@@ -47,10 +47,10 @@ class Player(PhysicsGameobject):
     def on_fixed_update(self, frame, engine):
 
         if keyboard.is_pressed("right"):
-            self.sprites = self.walk_right
+            self.set_sprites(self.walk_right)
             if self.x <= engine.width - Player.PLAYER_SIZE[0]:
                 self.rb.position = (self.x + 1, self.y)
         elif keyboard.is_pressed("left"):
-            self.sprites = self.walk_left
+            self.set_sprites(self.walk_left)
             if self.x >= 0:
                 self.rb.position = (self.x - 1, self.y)
