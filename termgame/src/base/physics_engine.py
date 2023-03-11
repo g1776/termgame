@@ -68,7 +68,7 @@ class PhysicsEngine(Engine):
         """The pymunk space for 2d physics."""
         return self.__space
 
-    def run(self, fps: int, headless: bool = False, ppf: int = 10) -> None:
+    def run(self, fps: int, headless: bool = False, ppf: int = 10, fontsize: int = 6) -> None:
         def runtime_injection(self: PhysicsEngine):
             """This function is injected into the base engine's run function.
                 It is called every frame.
@@ -90,4 +90,4 @@ class PhysicsEngine(Engine):
             for gameobject in gos_in_call_order:
                 gameobject.on_fixed_update(self.frame, self)
 
-        self._run(fps, runtime_injection, headless)
+        self._run(fps, fontsize, runtime_injection, headless)

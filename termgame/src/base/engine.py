@@ -65,15 +65,19 @@ class Engine:
     def elapsed_time(self) -> float:
         return time.time() - self.__starting_time
 
-    def run(self, fps: int, headless: bool = False) -> None:
+    def run(self, fps: int, headless: bool = False, fontsize: int = 6) -> None:
         """
         Run the engine at a given fps.
         """
 
-        self._run(fps, None, headless)
+        self._run(fps, None, fontsize, headless)
 
     def _run(
-        self, fps: int, runtime_injection: Callable[[Any], None] | None, headless: bool = False
+        self,
+        fps: int,
+        fontsize: int,
+        runtime_injection: Callable[[Any], None] | None,
+        headless: bool = False,
     ) -> None:
         self.__frame: int = 0
         self.__starting_time: float = time.time()
@@ -81,6 +85,11 @@ class Engine:
         # clear the screen of anything before we start
         cursor.hide()
         os.system("cls")
+
+        _ = input(
+            f"Press any key to start the game at {fps} fps. Recommended font size is"
+            f" {fontsize}pt..."
+        )
 
         # initialize the gameobjects
         for gameobject in self.gameobjects:

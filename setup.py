@@ -6,15 +6,14 @@ from pathlib import Path
 
 setup(
     name="termgame",
-    version="0.0.1",
+    version="0.0.2",
     description="Terminal-based graphical game engine",
     long_description=Path("README.md").read_text(encoding="utf-8"),
     long_description_content_type="text/markdown",
     author="Gregory Glatzer",
     author_email="gregoryg323@gmail.com",
     url="",
-    packages=["termgame"]
-    + ["termgame." + pkg for pkg in find_packages(where="termgame/src")],
+    packages=["termgame"] + ["termgame." + pkg for pkg in find_packages(where="termgame/src")],
     package_dir={
         "termgame": "termgame/src",
     },
