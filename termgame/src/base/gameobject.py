@@ -14,6 +14,9 @@ class GameobjectAnimator:
     """Class for animating gameobjects by looping through a list of sprites or meshes."""
 
     def __init__(self, elements: List):
+        if not isinstance(elements, list):
+            raise TypeError(f"GameobjectAnimator got type {type(elements)}. Expected list.")
+
         self.elements = elements
         self.active_el_idx = None
 

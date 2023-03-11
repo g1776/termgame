@@ -68,7 +68,7 @@ class PhysicsEngine(Engine):
         """The pymunk space for 2d physics."""
         return self.__space
 
-    def run(self, fps: int, headless: bool = False, ppf: int = 5) -> None:
+    def run(self, fps: int, headless: bool = False, ppf: int = 10) -> None:
         def runtime_injection(self: PhysicsEngine):
             """This function is injected into the base engine's run function.
                 It is called every frame.
@@ -78,7 +78,7 @@ class PhysicsEngine(Engine):
                 fps (int): The frames per second.
                 ppf (int, optional): Physics Per Frame. This defines the number of physics
                     simulations per frame, ie how many times "fixed_update()"
-                    is called per frame. Defaults to 5.
+                    is called per frame. Defaults to 10.
             """
             for _ in range(ppf):
                 self.space.step(1 / (fps * ppf))

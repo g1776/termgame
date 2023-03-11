@@ -59,9 +59,7 @@ pylint src
 
 ## Upcoming Features
 
--   Higher resolution rendering.
-    -   Adjust for terminal font size (make this a parameter in `engine.run()`)
-    -   Use presets with ConEmu
+-   Decorator (@) for Gameobject events such as `def walk()` that pass in engine and frame to them so you don't have to.
 -   Add support for 3D rendering.
     -   Approach: Raycasting with `pycaster`, or Binary space partitioning (BSP)
 -   Add support for importing 3D models.
