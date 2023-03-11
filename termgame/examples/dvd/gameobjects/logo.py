@@ -44,8 +44,8 @@ class DVDLogo(PhysicsGameobject):
         engine.space.add(c)
 
     # def randomize_pos(self: DVDLogo, engine):
-    #     self.x = choice(range(engine.width - self.get_active_sprite().width))
-    #     self.y = choice(range(engine.height - self.get_active_sprite().height))
+    #     self.x = choice(range(engine.width - self.width))
+    #     self.y = choice(range(engine.height - self.height))
 
     # def bounce(self, frame, engine):
 
@@ -70,8 +70,8 @@ class DVDLogo(PhysicsGameobject):
     #     h = engine.height
 
     #     # check if the gameobject is at the edge of the screen and choose a bounce direction
-    #     sprite_width: int = self.get_active_sprite().width
-    #     sprite_height: int = self.get_active_sprite().height
+    #     sprite_width: int = self.width
+    #     sprite_height: int = self.height
 
     #     on_left = lambda go: go.x == 0
     #     on_right = lambda go: go.x + sprite_width == w

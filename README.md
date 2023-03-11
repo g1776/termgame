@@ -46,3 +46,14 @@ mypy src
 flake8 src --max-line-length=99
 pylint src
 ```
+
+## Upcoming Features
+
+-   Higher resolution rendering.
+    -   Adjust for terminal font size (make this a parameter in `engine.run()`)
+    -   Use presets with ConEmu
+-   Add support for 3D rendering.
+    -   Approach: Raycasting with `pycaster`, or Binary space partitioning (BSP)
+-   Add support for importing 3D models.
+    -   Build wavefront files (obj) in Blender and import .obj files with `pywavefront`
+-   Add support for sound effects and music.

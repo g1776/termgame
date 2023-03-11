@@ -111,9 +111,7 @@ class Engine:
                     if gameobject.sprites is None or len(gameobject.sprites) == 0:
                         continue
 
-                    self.screen.paint_screen(
-                        gameobject.get_active_sprite(), gameobject.x, gameobject.y
-                    )
+                    self.screen.paint_screen(gameobject.active_sprite, gameobject.x, gameobject.y)
 
                 self.screen.render()
 
