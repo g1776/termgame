@@ -7,8 +7,8 @@ from gameobjects.wave_manager import WaveManager
 
 from termgame import PhysicsEngine
 
-W = 78 * 2
-H = 78
+W = 32 * 2
+H = 32
 WALL_THICKNESS = 1
 N_PARTICLES = 100
 

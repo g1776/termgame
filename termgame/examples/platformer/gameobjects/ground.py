@@ -3,6 +3,7 @@ import os
 import pymunk
 
 from termgame import PhysicsGameobject, Screen
+from termgame.util import get_bb_poly
 
 
 class Ground(PhysicsGameobject):
@@ -12,12 +13,17 @@ class Ground(PhysicsGameobject):
 
         sprites = [Screen(width, height).fill((196, 112, 6))]
 
-        PhysicsGameobject.__init__(self, x=x, y=y, sprites=sprites, static_body=True)
+        PhysicsGameobject.__init__(
+            self,
+            x=x,
+            y=y,
+            sprites=sprites,
+            static_body=True,
+            on_start=self.on_start,
+            name="Ground",
+        )
 
     def on_start(self, engine):
-        c = pymunk.Poly(
-            self.rb,
-            [(0, 0), (self.width, 0), (self.width, self.height), (0, self.height)],
-        )
+        c = get_bb_poly(self)
         c.mass = 1
         engine.space.add(c)

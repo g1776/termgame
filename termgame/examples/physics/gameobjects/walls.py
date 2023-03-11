@@ -1,6 +1,7 @@
 import pymunk
 
 from termgame import Engine, PhysicsGameobject, Screen
+from termgame.util import get_bb_poly
 
 
 class Wall(PhysicsGameobject):
@@ -18,16 +19,7 @@ class Wall(PhysicsGameobject):
         )
 
     def on_start(self, engine: Engine):
-
-        c = pymunk.Poly(
-            self.rb,
-            [
-                (0, 0),
-                (self.width, 0),
-                (self.width, self.height),
-                (0, self.height),
-            ],
-        )
+        c = get_bb_poly(self)
         c.elasticity = 0.9
         c.mass = 1
         engine.space.add(c)

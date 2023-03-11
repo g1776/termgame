@@ -2,7 +2,7 @@ import os
 
 import keyboard
 
-from termgame import Engine, PhysicsGameobject, Screen
+from termgame import PhysicsGameobject, Screen
 from termgame.util import flip_animation, get_bb_poly, stretch_animation
 
 
@@ -15,6 +15,10 @@ class Player(PhysicsGameobject):
 
         ground_height = 1
 
+        self.stand = [
+            Screen.from_image(self.SPRITES_FOLDER + "walk1.png", has_alpha=True),
+        ]
+
         self.walk_right = stretch_animation(
             [
                 Screen.from_image(self.SPRITES_FOLDER + "walk1.png", has_alpha=True),
@@ -25,6 +29,8 @@ class Player(PhysicsGameobject):
         )
 
         self.walk_left = flip_animation(self.walk_right, "x")
+
+        self.pressed = False
 
         PhysicsGameobject.__init__(
             self,
@@ -47,10 +53,17 @@ class Player(PhysicsGameobject):
     def on_fixed_update(self, frame, engine):
 
         if keyboard.is_pressed("right"):
-            self.set_sprites(self.walk_right)
+            if not self.pressed:
+                self.pressed = True
+                self.set_sprites(self.walk_right)
             if self.x <= engine.width - Player.PLAYER_SIZE[0]:
                 self.rb.position = (self.x + 1, self.y)
         elif keyboard.is_pressed("left"):
-            self.set_sprites(self.walk_left)
+            if not self.pressed:
+                self.pressed = True
+                self.set_sprites(self.walk_left)
             if self.x >= 0:
                 self.rb.position = (self.x - 1, self.y)
+        else:
+            self.pressed = False
+            self.set_sprites(self.stand)

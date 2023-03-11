@@ -108,6 +108,7 @@ class Gameobject:
 
     def set_sprites(self, sprites) -> None:
         self.__animator = GameobjectAnimator(sprites)
+        self.__animator.start()
         return None
 
     def get_active_sprite(self) -> Any:
@@ -120,6 +121,7 @@ class Gameobject:
 
     def set_meshes(self, meshes) -> None:
         self.__animator = GameobjectAnimator(meshes)
+        self.__animator.start()
         return None
 
     def get_active_mesh(self) -> Any:

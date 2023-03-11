@@ -10,5 +10,5 @@ H = 32
 level_ground = Ground(x=0, y=H - 1, width=W, height=1)
 
 
-e = PhysicsEngine(W, H, gameobjects=[Background(W, H), Player(H)])
+e = PhysicsEngine(W, H, gameobjects=[level_ground, Background(W, H), Player(H)])
 e.run(fps=20)

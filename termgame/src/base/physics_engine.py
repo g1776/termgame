@@ -83,11 +83,11 @@ class PhysicsEngine(Engine):
             for _ in range(ppf):
                 self.space.step(1 / (fps * ppf))
 
-            go_in_call_order = sorted(
+            gos_in_call_order = sorted(
                 cast(List[PhysicsGameobject], self.gameobjects),
                 key=lambda go: go.update_order,
             )
-            for gameobject in go_in_call_order:
+            for gameobject in gos_in_call_order:
                 gameobject.on_fixed_update(self.frame, self)
 
         self._run(fps, runtime_injection, headless)
