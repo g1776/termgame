@@ -16,6 +16,7 @@ class Wall(PhysicsGameobject):
             on_start=self.on_start,
             static_body=True,
             name="Wall",
+            
         )
 
     def on_start(self, engine: Engine):
