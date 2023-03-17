@@ -13,6 +13,7 @@ from ..util import get_bb_poly
 from .engine import Engine
 from .gameobject import Gameobject
 from .physics_gameobject import PhysicsGameobject
+from ..settings import Settings
 
 
 class PhysicsEngine(Engine):
@@ -68,20 +69,15 @@ class PhysicsEngine(Engine):
         """The pymunk space for 2d physics."""
         return self.__space
 
-    def run(self, fps: int, headless: bool = False, ppf: int = 10, fontsize: int = 6) -> None:
+    def run(self) -> None:
         def runtime_injection(self: PhysicsEngine):
             """This function is injected into the base engine's run function.
-                It is called every frame.
-
-            Args:
-                self (PhysicsEngine): The engine.
-                fps (int): The frames per second.
-                ppf (int, optional): Physics Per Frame. This defines the number of physics
-                    simulations per frame, ie how many times "fixed_update()"
-                    is called per frame. Defaults to 10.
+            It is called every frame.
             """
+
+            ppf = Settings.runtime_settings.ppf
             for _ in range(ppf):
-                self.space.step(1 / (fps * ppf))
+                self.space.step(1 / (Settings.runtime_settings.fps * ppf))
 
             gos_in_call_order = sorted(
                 cast(List[PhysicsGameobject], self.gameobjects),
@@ -90,4 +86,4 @@ class PhysicsEngine(Engine):
             for gameobject in gos_in_call_order:
                 gameobject.on_fixed_update(self.frame, self)
 
-        self._run(fps, fontsize, runtime_injection, headless)
+        self._run(runtime_injection)
