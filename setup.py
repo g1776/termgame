@@ -4,6 +4,12 @@ from distutils.core import setup
 from setuptools import find_packages
 from pathlib import Path
 
+
+def get_install_requires():
+    with open("./termgame/requirements.txt") as f:
+        return f.read().splitlines()
+
+
 setup(
     name="termgame",
     version="0.0.2",
@@ -17,13 +23,5 @@ setup(
     package_dir={
         "termgame": "termgame/src",
     },
-    install_requires=[
-        "Colr==0.9.1",
-        "cursor==1.3.5",
-        "keyboard==0.13.5",
-        "numpy==1.22.3",
-        "Pillow==9.3.0",
-        "pymunk==6.4.0",
-        "python-dotenv==0.21.0",
-    ],
+    install_requires=get_install_requires(),
 )
