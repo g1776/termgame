@@ -49,3 +49,22 @@ mypy src
 flake8 src --max-line-length=99
 pylint src
 ```
+
+## Terminal settings to optimize rendering
+
+```json
+{
+    "terminal.integrated.fontSize": 8,
+    "terminal.integrated.scrollback": 78,
+    "terminal.integrated.gpuAcceleration": "on" // if you have a GPU, otherwise use "auto"
+}
+```
+
+## Upcoming Features
+
+-   Decorator (@) for Gameobject events such as `def walk()` that pass in engine and frame to them so you don't have to.
+-   Add support for 3D rendering.
+    -   Approach: Raycasting with `pycaster`, or Binary space partitioning (BSP)
+-   Add support for importing 3D models.
+    -   Build wavefront files (obj) in Blender and import .obj files with `pywavefront`
+-   Add support for sound effects and music.

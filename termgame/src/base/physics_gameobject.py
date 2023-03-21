@@ -49,9 +49,14 @@ class PhysicsGameobject(Gameobject):
                     self,
                 )
 
-            # Update the position of the gameobject to match the rigidbody.
-            self.x = round(self.__rigidbody.position.x)
-            self.y = round(self.__rigidbody.position.y)
+            try:
+                # Update the position of the gameobject to match the rigidbody.
+                self.x = round(self.__rigidbody.position.x)
+                self.y = round(self.__rigidbody.position.y)
+            except ValueError:
+                # if position is NaN for some reason, do not update position.
+                on_fixed_update(frame, engine)
+                return
 
             # this is a hack to make sure the object always stays within the screen.
             # TODO: fix this.
@@ -87,7 +92,7 @@ class PhysicsGameobject(Gameobject):
             x=gameobject.x,
             y=gameobject.y,
             depth=gameobject.depth,
-            sprites=gameobject.sprites,
+            sprites=gameobject.get_sprites(),
             on_start=gameobject.on_start,
             on_update=gameobject.on_update,
             name=gameobject.name,

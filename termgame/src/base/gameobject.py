@@ -11,6 +11,32 @@ from typing import Callable, List, Dict, Any
 from ..util import clamp
 
 
+class GameobjectAnimator:
+    """Class for animating gameobjects by looping through a list of sprites or meshes."""
+
+    def __init__(self, elements: List):
+        if not isinstance(elements, list):
+            raise TypeError(f"GameobjectAnimator got type {type(elements)}. Expected list.")
+
+        self.elements = elements
+        self.active_el_idx: int | None = None
+
+    def start(self) -> None:
+        """Start the animation."""
+        if self.elements != []:
+            self.active_el_idx = 0
+
+    def next(self, frame: int) -> None:
+        """Move the animation to the next frame in the list of elements."""
+        if self.elements != []:
+            self.active_el_idx = frame % len(self.elements)
+
+    def get_active_element(self) -> Any:
+        if self.active_el_idx is None:
+            return None
+        return self.elements[self.active_el_idx]
+
+
 @dataclass
 class Gameobject:
     def __init__(
@@ -20,6 +46,7 @@ class Gameobject:
         depth: int = 0,
         update_order: int = 0,
         sprites: List | None = None,
+        meshes: List | None = None,
         on_start: Callable = lambda engine: None,
         on_update: Callable = lambda frame, engine: None,
         name: str = "",
@@ -28,17 +55,20 @@ class Gameobject:
         self.y = y
         self.depth = depth
         self.update_order = update_order
-        self.sprites = sprites
+
+        # make sure the developer doesn't try to use both sprites and meshes.
+        if (sprites is not None) and (meshes is not None):
+            raise ValueError("Cannot use both sprites and meshes.")
+        self.__animator = GameobjectAnimator((sprites or meshes) or [])
+
         self.state: Dict[Any, Any] = {}
         self.__name = name
-        self.__active_sprite_idx = None
 
         def internal_on_update(frame: int, engine):
             """Some things we want to do every frame on top of what the developer wants."""
 
-            # Move the animation to the next frame in the list of sprites.
-            if (self.sprites is not None) and (len(self.sprites) > 0):
-                self.__active_sprite_idx = frame % len(self.sprites)
+            # update the active sprite/mesh.
+            self.__animator.next(frame)
 
             # this is a hack to make sure the object always stays within the screen.
             # TODO: fix this.
@@ -50,17 +80,14 @@ class Gameobject:
 
         def internal_on_start(engine):
             """Some things we want to do when the gameobject is added to the engine."""
-            if (self.sprites is not None) and (len(self.sprites) > 0):
-                self.__active_sprite_idx = 0
+
+            # start the animator.
+            self.__animator.start()
+
             on_start(engine)
 
         self.on_update = internal_on_update
         self.on_start = internal_on_start
-
-    def get_active_sprite(self):
-        if self.__active_sprite_idx is None:
-            return None
-        return self.sprites[self.__active_sprite_idx]
 
     @property
     def name(self) -> str:
@@ -71,18 +98,42 @@ class Gameobject:
         return False
 
     @property
-    def width(self) -> int:
-        active_sprite = self.get_active_sprite()
-        if active_sprite is None:
+    def width(self) -> int | float:
+        active_element = self.__animator.get_active_element()
+        if active_element is None:
             return 0
-        return active_sprite.width
+        return active_element.width
 
     @property
-    def height(self) -> int:
-        active_sprite = self.get_active_sprite()
-        if active_sprite is None:
+    def height(self) -> int | float:
+        active_element = self.__animator.get_active_element()
+        if active_element is None:
             return 0
-        return active_sprite.height
+        return active_element.height
+
+    def get_sprites(self) -> Any:
+        """Access the sprites (2D) of the gameobject, if any."""
+        return self.__animator.elements
+
+    def set_sprites(self, sprites) -> None:
+        self.__animator = GameobjectAnimator(sprites)
+        self.__animator.start()
+
+    def get_active_sprite(self) -> Any:
+        """Access the active sprite (2D) of the gameobject, if any."""
+        return self.__animator.get_active_element()
+
+    def get_meshes(self) -> Any:
+        """Access the meshes (3D) of the gameobject, if any."""
+        return self.__animator.elements
+
+    def set_meshes(self, meshes) -> None:
+        self.__animator = GameobjectAnimator(meshes)
+        self.__animator.start()
+
+    def get_active_mesh(self) -> Any:
+        """Access the active mesh (3D) of the gameobject, if any."""
+        return self.__animator.get_active_element()
 
     def __str__(self):
         return f"Gameobject({self.name})"

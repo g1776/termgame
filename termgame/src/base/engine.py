@@ -16,6 +16,7 @@ import cursor  # type: ignore
 
 from ..graphics.screen import Screen
 from .gameobject import Gameobject
+from ..settings import Settings
 
 
 class Engine:
@@ -65,15 +66,16 @@ class Engine:
     def elapsed_time(self) -> float:
         return time.time() - self.__starting_time
 
-    def run(self, fps: int, headless: bool = False) -> None:
+    def run(self) -> None:
         """
-        Run the engine at a given fps.
+        Run the engine.
         """
 
-        self._run(fps, None, headless)
+        self._run(None)
 
     def _run(
-        self, fps: int, runtime_injection: Callable[[Any], None] | None, headless: bool = False
+        self,
+        runtime_injection: Callable[[Any], None] | None,
     ) -> None:
         self.__frame: int = 0
         self.__starting_time: float = time.time()
@@ -82,6 +84,12 @@ class Engine:
         cursor.hide()
         os.system("cls")
 
+        if Settings.runtime_settings.wait_for_start:
+            _ = input(
+                f"Press any key to start the game at {Settings.runtime_settings.fps} fps."
+                f" Recommended font size is {Settings.render_settings.fontsize}pt..."
+            )
+
         # initialize the gameobjects
         for gameobject in self.gameobjects:
             gameobject.on_start(self)
@@ -89,7 +97,7 @@ class Engine:
         # start game loop
         while True:
 
-            if headless:
+            if Settings.runtime_settings.headless:
                 print(f"Frame: {self.__frame}")
 
             # call on_update for each gameobject, passing the current frame
@@ -102,13 +110,13 @@ class Engine:
             if runtime_injection:
                 runtime_injection(self)
 
-            if not headless:
+            if not Settings.runtime_settings.headless:
 
                 # after updating the gameobjects, redraw them
                 for gameobject in self.gameobjects:
 
                     # we can't draw gameobjects that don't have any sprites
-                    if len(gameobject.sprites) == 0:
+                    if gameobject.get_sprites() is None or len(gameobject.get_sprites()) == 0:
                         continue
 
                     self.screen.paint_screen(
@@ -117,9 +125,9 @@ class Engine:
 
                 self.screen.render()
 
-            time.sleep(1 / fps)
+            time.sleep(1 / Settings.runtime_settings.fps)
 
-            if not headless:
+            if not Settings.runtime_settings.headless:
                 self.clear()
 
             # update internal counters

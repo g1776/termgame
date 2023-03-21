@@ -60,5 +60,6 @@ disable = [
   "too-few-public-methods",
   "unnecessary-dunder-call",
   "too-many-instance-attributes",
-  "cyclic-import"
+  "cyclic-import",
+  "invalid-name"
 ]
