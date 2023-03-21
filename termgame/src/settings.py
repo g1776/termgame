@@ -8,6 +8,10 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
+def _bool(s: str) -> bool:
+    return s.lower() in ("yes", "true", "t", "1")
+
+
 @dataclass
 class LogSettings:
     level: str = os.getenv("LOG_LEVEL", "INFO")
@@ -28,13 +32,13 @@ class RuntimeSettings:
     fps: int = int(os.getenv("FPS", "20"))
 
     # Whether to run the game in headless mode
-    headless: bool = bool(os.getenv("HEADLESS", "False"))
+    headless: bool = _bool(os.getenv("HEADLESS", "False"))
 
     # The number of physics steps per frame
     ppf: int = int(os.getenv("PPF", "10"))
 
     # Whether to wait for the user to press a key before starting the game
-    wait_for_start: bool = bool(os.getenv("WAIT_FOR_START", "True"))
+    wait_for_start: bool = _bool(os.getenv("WAIT_FOR_START", "True"))
 
 
 @dataclass(frozen=True)
