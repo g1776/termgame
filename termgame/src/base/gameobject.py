@@ -18,7 +18,7 @@ class GameobjectAnimator:
             raise TypeError(f"GameobjectAnimator got type {type(elements)}. Expected list.")
 
         self.elements = elements
-        self.active_el_idx = None
+        self.active_el_idx: int | None = None
 
     def start(self) -> None:
         """Start the animation."""
@@ -112,7 +112,6 @@ class Gameobject:
     def set_sprites(self, sprites) -> None:
         self.__animator = GameobjectAnimator(sprites)
         self.__animator.start()
-        return None
 
     def get_active_sprite(self) -> Any:
         """Access the active sprite (2D) of the gameobject, if any."""
@@ -125,7 +124,6 @@ class Gameobject:
     def set_meshes(self, meshes) -> None:
         self.__animator = GameobjectAnimator(meshes)
         self.__animator.start()
-        return None
 
     def get_active_mesh(self) -> Any:
         """Access the active mesh (3D) of the gameobject, if any."""

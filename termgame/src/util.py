@@ -5,13 +5,13 @@ Date: 11/07/2022
 """
 
 from __future__ import annotations
+from ctypes import POINTER, WinDLL, Structure, sizeof, byref
+from ctypes.wintypes import BOOL, SHORT, WCHAR, UINT, ULONG, DWORD, HANDLE
+from typing import List
 import numpy as np
 import pymunk
 
-from typing import List
 from .graphics.screen import Screen
-from ctypes import POINTER, WinDLL, Structure, sizeof, byref
-from ctypes.wintypes import BOOL, SHORT, WCHAR, UINT, ULONG, DWORD, HANDLE
 
 
 def stretch_animation(sprites: List[Screen], stretch: int):
