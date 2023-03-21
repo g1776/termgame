@@ -8,6 +8,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from typing import Callable, List, Dict, Any
+from ..util import clamp
 
 
 class GameobjectAnimator:
@@ -68,6 +69,11 @@ class Gameobject:
 
             # update the active sprite/mesh.
             self.__animator.next(frame)
+
+            # this is a hack to make sure the object always stays within the screen.
+            # TODO: fix this.
+            self.x = clamp(self.x, 0, engine.width - self.width)
+            self.y = clamp(self.y, 0, engine.height - self.height)
 
             # call the developer's on_update function.
             on_update(frame, engine)

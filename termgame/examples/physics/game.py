@@ -1,3 +1,9 @@
+"""
+Description: An example of particles moving with forces applied to them (using pymunk)
+Author: Gregory Glatzer
+Date: 12/24/2022
+"""
+
 import random
 
 from gameobjects.background import Background
