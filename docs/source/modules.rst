@@ -1,7 +1,7 @@
-src
-===
+termgame
+========
 
 .. toctree::
    :maxdepth: 4
 
-   src
+   termgame

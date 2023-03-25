@@ -21,7 +21,7 @@ setup(
     url="",
     packages=["termgame"] + ["termgame." + pkg for pkg in find_packages(where="src")],
     package_dir={
-        "termgame": "src",
+        "termgame": "termgame",
     },
     install_requires=get_install_requires(),
 )

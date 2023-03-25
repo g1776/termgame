@@ -55,7 +55,7 @@ pylint src
 You can run the following command (from a bash terminal) to auto-generate docs for the project. Make sure to `pip install sphinx` first.
 
 ```bash
-sphinx-apidoc -o source/ ../src
+sphinx-apidoc -o source/ ../termgame
 ```
 
 If you want to build the docs you can run the `make html` command in the `docs` directory. Such as:

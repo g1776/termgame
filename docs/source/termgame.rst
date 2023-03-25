@@ -1,5 +1,5 @@
-src package
-===========
+termgame package
+================
 
 Subpackages
 -----------
@@ -7,32 +7,32 @@ Subpackages
 .. toctree::
    :maxdepth: 4
 
-   src.base
-   src.graphics
+   termgame.base
+   termgame.graphics
 
 Submodules
 ----------
 
-src.logger module
------------------
+termgame.logger module
+----------------------
 
-.. automodule:: src.logger
+.. automodule:: termgame.logger
    :members:
    :undoc-members:
    :show-inheritance:
 
-src.settings module
--------------------
+termgame.settings module
+------------------------
 
-.. automodule:: src.settings
+.. automodule:: termgame.settings
    :members:
    :undoc-members:
    :show-inheritance:
 
-src.util module
----------------
+termgame.util module
+--------------------
 
-.. automodule:: src.util
+.. automodule:: termgame.util
    :members:
    :undoc-members:
    :show-inheritance:
@@ -40,7 +40,7 @@ src.util module
 Module contents
 ---------------
 
-.. automodule:: src
+.. automodule:: termgame
    :members:
    :undoc-members:
    :show-inheritance:
