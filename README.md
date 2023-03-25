@@ -50,6 +50,15 @@ flake8 src --max-line-length=99
 pylint src
 ```
 
+### Generating docs
+
+You can run the following command (from a bash terminal) to auto-generate docs for the project. Make sure to `pip install sphinx` first.
+
+````bash
+PYTHONPATH=. sphinx-autogen docs/source/index.rst
+```
+
+
 ## Terminal settings to optimize rendering
 
 ```json
@@ -58,7 +67,7 @@ pylint src
     "terminal.integrated.scrollback": 78,
     "terminal.integrated.gpuAcceleration": "on" // if you have a GPU, otherwise use "auto"
 }
-```
+````
 
 ## Upcoming Features
 

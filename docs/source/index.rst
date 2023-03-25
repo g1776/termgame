@@ -17,3 +17,12 @@ Contents
 
    usage
    api
+
+Modules
+=======
+
+.. autosummary::
+   :toctree: modules
+
+   src.base
+   src.graphics
