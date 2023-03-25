@@ -1,40 +1,35 @@
-# Configuration file for the Sphinx documentation builder.
+import os
+import sys
 
-# -- Project information
+sys.path.insert(0, os.path.abspath("../../"))
+
+# Configuration file for the Sphinx documentation builder.
+#
+# For the full list of built-in configuration values, see the documentation:
+# https://www.sphinx-doc.org/en/master/usage/configuration.html
+
+# -- Project information -----------------------------------------------------
+# https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 project = "termgame"
 copyright = "2023, Gregory Glatzer"
 author = "Gregory Glatzer"
 
-release = "0.0.4"
-version = "0.0.4"
-
-# -- General configuration
-
-# simply add the extension to your list of extensions
-extensions = []
-
-source_suffix = [".rst", ".md"]
+# -- General configuration ---------------------------------------------------
+# https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
 extensions = [
-    "sphinx.ext.duration",
-    "sphinx.ext.doctest",
+    "sphinx_rtd_theme",
     "sphinx.ext.autodoc",
     "sphinx.ext.autosummary",
-    "sphinx.ext.intersphinx",
 ]
 
-intersphinx_mapping = {
-    "python": ("https://docs.python.org/3/", None),
-    "sphinx": ("https://www.sphinx-doc.org/en/master/", None),
-}
-intersphinx_disabled_domains = ["std"]
-
 templates_path = ["_templates"]
+exclude_patterns = []
 
-# -- Options for HTML output
+
+# -- Options for HTML output -------------------------------------------------
+# https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
 html_theme = "sphinx_rtd_theme"
-
-# -- Options for EPUB output
-epub_show_urls = "footnote"
+html_static_path = ["_static"]

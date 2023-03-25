@@ -1,20 +1,22 @@
-Welcome to termgame documentation!
-===================================
+.. termgame documentation master file, created by
+   sphinx-quickstart on Sat Mar 25 14:52:08 2023.
+   You can adapt this file completely to your liking, but it should at least
+   contain the root `toctree` directive.
 
-**termgame** is a Python library for creating graphical games that run completely out of the terminal 🖥️.
+Welcome to termgame's documentation!
+====================================
 
-Check out the :doc:`usage` section for further information, including
-how to :ref:`installation` the project.
+.. toctree::
+   :maxdepth: 4
+   :caption: Contents:
 
-.. note::
+   modules
 
-   This project is under active development.
 
-Modules
-=======
 
-.. autosummary::
-   :toctree: modules
+Indices and tables
+==================
 
-   src.base
-   src.graphics
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`
