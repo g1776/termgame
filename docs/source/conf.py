@@ -11,7 +11,13 @@ version = "0.0.4"
 
 # -- General configuration
 
+# simply add the extension to your list of extensions
+extensions = []
+
+source_suffix = [".rst", ".md"]
+
 extensions = [
+    "myst_parser",
     "sphinx.ext.duration",
     "sphinx.ext.doctest",
     "sphinx.ext.autodoc",
