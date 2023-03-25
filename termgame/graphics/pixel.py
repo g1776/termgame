@@ -1,8 +1,10 @@
 """
 Description: This file defines two classes for working with RGB colors: RGBColor and RGBPixel. 
-    RGBColor is a simple class for representing an RGB color with values between 0-255 for the red, green, and blue channels. 
-    RGBPixel extends RGBColor to include a symbol and transparency value for displaying pixels in a terminal. 
+RGBColor is a simple class for representing an RGB color with values between 0-255 for the red, green, and blue channels. 
+RGBPixel extends RGBColor to include a symbol and transparency value for displaying pixels in a terminal. 
+
 Author: Gregory Glatzer
+
 Date: 3/25/2023
 """
 

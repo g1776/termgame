@@ -1,4 +1,4 @@
-termgame package
+API
 ================
 
 Subpackages

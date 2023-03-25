@@ -6,8 +6,15 @@
 Welcome to termgame's documentation!
 ====================================
 
-.. toctree::
-   :maxdepth: 5
-   :caption: Contents:
+termgame is a terminal-based graphical game engine for Python.
 
-   modules
+.. image:: ./_static/termgame.gif
+  :width: 400
+  :alt: Termgame running a "wave machine" in the VSCode terminal
+
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Contents
+
+   termgame
