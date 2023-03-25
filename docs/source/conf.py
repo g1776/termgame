@@ -17,7 +17,6 @@ extensions = []
 source_suffix = [".rst", ".md"]
 
 extensions = [
-    "myst_parser",
     "sphinx.ext.duration",
     "sphinx.ext.doctest",
     "sphinx.ext.autodoc",
