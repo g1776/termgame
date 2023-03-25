@@ -54,10 +54,16 @@ pylint src
 
 You can run the following command (from a bash terminal) to auto-generate docs for the project. Make sure to `pip install sphinx` first.
 
-````bash
-PYTHONPATH=. sphinx-autogen docs/source/index.rst
+```bash
+sphinx-apidoc -o source/ ../src
 ```
 
+If you want to build the docs you can run the `make html` command in the `docs` directory. Such as:
+
+```bash
+cd docs
+make html
+```
 
 ## Terminal settings to optimize rendering
 
@@ -67,7 +73,7 @@ PYTHONPATH=. sphinx-autogen docs/source/index.rst
     "terminal.integrated.scrollback": 78,
     "terminal.integrated.gpuAcceleration": "on" // if you have a GPU, otherwise use "auto"
 }
-````
+```
 
 ## Upcoming Features
 
