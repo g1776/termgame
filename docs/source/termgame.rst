@@ -26,7 +26,7 @@ termgame.settings module
 
 .. automodule:: termgame.settings
    :members:
-   :undoc-members:
+   :undoc-members: _bool
    :show-inheritance:
 
 termgame.util module
