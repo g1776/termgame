@@ -125,15 +125,14 @@ class Gameobject:
 
     def get_meshes(self) -> Any:
         """Access the meshes (3D) of the gameobject, if any."""
-        return self.__animator.elements
+        return self.get_sprites()
 
     def set_meshes(self, meshes) -> None:
-        self.__animator = GameobjectAnimator(meshes)
-        self.__animator.start()
+        self.set_sprites(meshes)
 
     def get_active_mesh(self) -> Any:
         """Access the active mesh (3D) of the gameobject, if any."""
-        return self.__animator.get_active_element()
+        return self.get_active_sprite()
 
     def __str__(self):
         return f"Gameobject({self.name})"
