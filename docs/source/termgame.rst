@@ -34,7 +34,7 @@ termgame.util module
 
 .. automodule:: termgame.util
    :members:
-   :undoc-members:
+   :undoc-members: clamp
    :show-inheritance:
 
 Module contents

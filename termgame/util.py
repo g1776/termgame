@@ -1,13 +1,11 @@
 """
 Description: This module contains utility functions for termgame.
 Author: Gregory Glatzer
-Date: 11/07/2022
+Date: 4/04/2023
 """
 
 from __future__ import annotations
-from ctypes import POINTER, WinDLL, Structure, sizeof, byref
-from ctypes.wintypes import BOOL, SHORT, WCHAR, UINT, ULONG, DWORD, HANDLE
-from typing import List
+from typing import Any, List
 import numpy as np
 import pymunk
 
@@ -17,6 +15,13 @@ from .graphics.screen import Screen
 def stretch_animation(sprites: List[Screen], stretch: int):
     """
     Stretch an animation out (multiply frames). This effectively slows down the animation.
+
+    :param sprites: List of sprites to stretch.
+    :type sprites: List[Screen]
+    :param stretch: Number of times to stretch the animation.
+    :type stretch: int
+    :return: List of stretched sprites.
+    :rtype: List[Screen]
     """
 
     new_sprites = []
@@ -26,15 +31,22 @@ def stretch_animation(sprites: List[Screen], stretch: int):
     return new_sprites
 
 
-def flip_animation(sprites: List[Screen], axis: str = "x"):
+def flip_animation(sprites: List[Screen], axis: str = "x") -> List[Screen]:
     """
     Flip an animation along the given axis (x or y).
+
+    :param sprites: List of sprites to flip.
+    :type sprites: List[Screen]
+    :param axis: Axis to flip the animation along, either x or y.
+    :type axis: str
+    :return: List of flipped sprites.
+    :rtype: List[Screen]
     """
 
     if axis not in ["x", "y"]:
         raise ValueError("axis must be either x or y")
 
-    new_sprites = []
+    new_sprites: List[Screen] = []
     for sprite in sprites:
         new_sprite: Screen = Screen(sprite.width, sprite.height).paint_screen(sprite, 0, 0)
         new_sprite.pixels = np.flip(new_sprite.pixels, axis=0 if axis == "y" else 1)
@@ -45,6 +57,15 @@ def flip_animation(sprites: List[Screen], axis: str = "x"):
 def scroll_sprite(sprite: Screen, dx: int, dy: int) -> Screen:
     """
     Scroll a sprite by dx and dy.
+
+    :param sprite: Sprite to scroll.
+    :type sprite: Screen
+    :param dx: Number of pixels to scroll in the x direction.
+    :type dx: int
+    :param dy: Number of pixels to scroll in the y direction.
+    :type dy: int
+    :return: Scrolled sprite.
+    :rtype: Screen
     """
 
     new_sprite: Screen = Screen(sprite.width, sprite.height).paint_screen(sprite, 0, 0)
@@ -57,6 +78,11 @@ def get_bb_poly(go) -> pymunk.Poly:
     """
     Get a polygon for a gameobject to be used pymunk shape
     that is a rectangle the width and height of the gameobject.
+
+    :param go: Gameobject to get the bounding box for.
+    :type go: GameObject
+    :return: pymunk.Poly object representing the bounding box.
+    :rtype: pymunk.Poly
     """
 
     return pymunk.Poly(
@@ -70,54 +96,5 @@ def get_bb_poly(go) -> pymunk.Poly:
     )
 
 
-def clamp(value, smallest, largest):
+def clamp(value: Any, smallest: Any, largest: Any) -> Any:
     return max(smallest, min(value, largest))
-
-
-def change_font_size(size=2):
-
-    LF_FACESIZE = 32
-    STD_OUTPUT_HANDLE = -11
-
-    class COORD(Structure):
-        _fields_ = [
-            ("X", SHORT),
-            ("Y", SHORT),
-        ]
-
-    class CONSOLE_FONT_INFOEX(Structure):
-        _fields_ = [
-            ("cbSize", ULONG),
-            ("nFont", DWORD),
-            ("dwFontSize", COORD),
-            ("FontFamily", UINT),
-            ("FontWeight", UINT),
-            ("FaceName", WCHAR * LF_FACESIZE),
-        ]
-
-    kernel32_dll = WinDLL("kernel32.dll")
-
-    get_last_error_func = kernel32_dll.GetLastError
-    get_last_error_func.argtypes = []
-    get_last_error_func.restype = DWORD
-
-    get_std_handle_func = kernel32_dll.GetStdHandle
-    get_std_handle_func.argtypes = [DWORD]
-    get_std_handle_func.restype = HANDLE
-
-    get_current_console_font_ex_func = kernel32_dll.GetCurrentConsoleFontEx
-    get_current_console_font_ex_func.argtypes = [HANDLE, BOOL, POINTER(CONSOLE_FONT_INFOEX)]
-    get_current_console_font_ex_func.restype = BOOL
-
-    set_current_console_font_ex_func = kernel32_dll.SetCurrentConsoleFontEx
-    set_current_console_font_ex_func.argtypes = [HANDLE, BOOL, POINTER(CONSOLE_FONT_INFOEX)]
-    set_current_console_font_ex_func.restype = BOOL
-
-    stdout = get_std_handle_func(STD_OUTPUT_HANDLE)
-    font = CONSOLE_FONT_INFOEX()
-    font.cbSize = sizeof(CONSOLE_FONT_INFOEX)
-
-    font.dwFontSize.X = size
-    font.dwFontSize.Y = size
-
-    set_current_console_font_ex_func(stdout, False, byref(font))
