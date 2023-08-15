@@ -34,6 +34,16 @@ To run the examples from the source code, first "build" the package by running `
 python termgame/examples/<example_name>/game.py
 ```
 
+## Terminal settings to optimize rendering
+
+```json
+{
+    "terminal.integrated.fontSize": 8,
+    "terminal.integrated.scrollback": 78,
+    "terminal.integrated.gpuAcceleration": "on" // if you have a GPU, otherwise use "auto"
+}
+```
+
 ## Contributing
 
 Contributions are welcome! Please open an issue or pull request if you have any suggestions or bug reports. The main branch is used for releases, so please open pull requests against the `development` branch.
@@ -63,16 +73,6 @@ If you want to build the docs you can run the `make html` command in the `docs` 
 ```bash
 cd docs
 make html
-```
-
-## Terminal settings to optimize rendering
-
-```json
-{
-    "terminal.integrated.fontSize": 8,
-    "terminal.integrated.scrollback": 78,
-    "terminal.integrated.gpuAcceleration": "on" // if you have a GPU, otherwise use "auto"
-}
 ```
 
 ## Upcoming Features
