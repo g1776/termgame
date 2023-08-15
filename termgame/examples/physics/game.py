@@ -42,4 +42,4 @@ e = PhysicsEngine(
     ],
 )
 
-e.run(fps=20, ppf=10)
+e.run()

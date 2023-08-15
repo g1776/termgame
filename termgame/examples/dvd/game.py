@@ -15,4 +15,4 @@ W = 32
 H = 32
 
 e = Engine(W, H, gameobjects=[Background(W, H), DVDLogo()])
-e.run(fps=10)
+e.run()
