@@ -1,7 +1,7 @@
 """
 Description: An example of moving a player back and forth using keyboard arrows.
 Author: Gregory Glatzer
-Date: 12/24/2022
+Date: 8/15/2023
 """
 
 from gameobjects.background import Background

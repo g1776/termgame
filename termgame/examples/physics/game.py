@@ -1,7 +1,7 @@
 """
 Description: An example of particles moving with forces applied to them (using pymunk)
 Author: Gregory Glatzer
-Date: 12/24/2022
+Date: 8/15/2023
 """
 
 import random
